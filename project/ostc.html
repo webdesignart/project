@@ -1,0 +1,114 @@
+<html>
+<head>
+<title>project</title>
+<link rel="stylesheet" href="new/project.css">
+<body>
+<header>
+<h1>OSTC PROJECT</h1>
+<h2>TOPIC: UP-COUNTER</h2>
+</header>
+<main>
+<section>
+<h2>GROUP MEMBERS</h2>
+<ol>
+   <li>Sakshi shukla</li>
+   <li>Pratiksha Vethekar</li>
+   <li>Simran pandey</li>
+   <li>Shwetakumari singh</li>
+</ol>
+</section>
+<nav>
+<h2>CLICK ON THE LINK BELOW TO VIEW CODE AND OUTPUT
+OF OUR PROJECT!!</h2>
+<a href="https://www.edaplayground.com/x/47XH">project</a>
+<h3>PROCEDURE FOR VIEWING THE OUTPUT</h3>
+<p>1) click on the link given above</p>
+<p>2) on the top right corner click on the menu box and select run 
+option</p>
+<p>3) inside run option select login(save edits) option.</p>
+<p>4) Register for new account. Provide your email and set some
+paasword. provide some basic information of yours and click on 
+done.</p>
+<p>5) Now again click on run and the output will be visible. ZOOM IN 
+to watch the output more deeply.</p>
+</nav>
+<figure>
+<h2>OUTPUT</h2>
+<img src="output.png" width="40%" height="40%" alt="output"/>
+</figure>
+<details><summary>VHDL CODE OF UP-COUNTER WITH TESTBENCH</summary>
+<h3>vhdl code</h3><p>library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+-- FPGA projects using Verilog code VHDL code
+-- fpga4student.com: FPGA projects, Verilog projects, VHDL projects
+-- VHDL project: VHDL code for counters with testbench  
+-- VHDL project: VHDL code for up counter   
+entity UP_COUNTER is
+    Port ( clk: in std_logic; -- clock input
+           reset: in std_logic; -- reset input 
+           counter: out std_logic_vector(3 downto 0) -- output 4-bit counter
+     );
+end UP_COUNTER;
+
+architecture Behavioral of UP_COUNTER is
+signal counter_up: std_logic_vector(3 downto 0);
+begin
+-- up counter
+process(clk,reset)
+begin
+if(rising_edge(clk)) then
+    if(reset='1') then
+         counter_up <= x"0";
+    else
+        counter_up <= counter_up + x"1";
+    end if;
+ end if;
+end process;
+ counter <= counter_up;
+
+end Behavioral;</P><h3>testbench</h3><p>library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+-- FPGA projects using Verilog code VHDL code
+-- fpga4student.com: FPGA projects, Verilog projects, VHDL projects
+-- VHDL project: VHDL code for counters with testbench  
+-- VHDL project: Testbench VHDL code for up counter
+entity tb_counters is
+end tb_counters;
+
+architecture Behavioral of tb_counters is
+
+component UP_COUNTER 
+    Port ( clk: in std_logic; -- clock input
+           reset: in std_logic; -- reset input 
+           counter: out std_logic_vector(3 downto 0) -- output 4-bit counter
+     );
+end component;
+signal reset,clk: std_logic;
+signal counter:std_logic_vector(3 downto 0);
+
+begin
+dut: UP_COUNTER port map (clk => clk, reset=>reset, counter => counter);
+   -- Clock process definitions
+clock_process :process
+begin
+     clk <= '0';
+     wait for 10 ns;
+     clk <= '1';
+     wait for 10 ns;
+end process;
+
+
+-- Stimulus process
+stim_proc: process
+begin        
+   -- hold reset state for 100 ns.
+     reset <= '1';
+   wait for 20 ns;    
+    reset <= '0';
+   wait;
+end process;
+end Behavioral;</p></details>
+</main>
+</body>
+</html>
